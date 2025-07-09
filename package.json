@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "pytest -s tests",
-    "black": "black ."
+    "black": "black .",
+    "server": "uvicorn server:app --reload"
   },
   "repository": {
     "type": "git",
