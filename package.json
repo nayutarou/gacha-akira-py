@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "pytest tests",
+    "test": "pytest -s tests",
     "black": "black ."
   },
   "repository": {
