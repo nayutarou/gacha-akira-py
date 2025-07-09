@@ -1,0 +1,23 @@
+{
+  "name": "gacha-akira-py",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.py",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "black": "black ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nayutarou/gacha-akira-py.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nayutarou/gacha-akira-py/issues"
+  },
+  "homepage": "https://github.com/nayutarou/gacha-akira-py#readme"
+}
