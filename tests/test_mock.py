@@ -1,9 +1,11 @@
 import sys
 import os
 import pytest
+
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import gacha
+
 
 def test_mocked_probability(monkeypatch):
     mock_probs = {"A": 1, "B": 1, "C": 1, "D": 97}

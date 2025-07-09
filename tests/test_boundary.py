@@ -1,8 +1,10 @@
 import sys
 import os
+
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from settings import gacha_probs
+
 
 def test_probabilities_are_int():
     print("\n[境界値テスト] 確率値が整数かどうか")
@@ -13,6 +15,7 @@ def test_probabilities_are_int():
     except AssertionError:
         print("[テスト失敗] 整数でない確率値があります")
         raise
+
 
 def test_probabilities_in_range():
     print("[境界値テスト] 確率値が0より大きく100未満か")

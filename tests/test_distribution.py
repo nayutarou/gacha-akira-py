@@ -1,17 +1,20 @@
 import sys
 import os
 import pytest
+
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from gacha import gacha_draw
 from settings import gacha_probs
 from collections import Counter
+
 
 def test_all_items_appear():
     results = set()
     for _ in range(10000):
         results.add(gacha_draw())
     assert set(gacha_probs.keys()) == results
+
 
 def test_distribution():
     N = 100000
