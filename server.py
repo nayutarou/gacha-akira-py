@@ -2,7 +2,12 @@
 from fastapi import FastAPI
 from gacha import gacha_draw
 
+
 app = FastAPI()
+
+@app.on_event("startup")
+def startup_event():
+    print("[INFO] APIサーバーを起動します。使用ポート: 8000")
 
 
 @app.get("/gacha")
