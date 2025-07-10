@@ -20,14 +20,18 @@ class TestBoundary:
         """確率設定の値が整数であることをテスト"""
         print("\n[境界値テスト] 確率値が整数かどうか")
         for item, prob in probs.items():
-            assert isinstance(prob, int), f"アイテム'{item}'の確率({prob})が整数ではありません"
+            assert isinstance(
+                prob, int
+            ), f"アイテム'{item}'の確率({prob})が整数ではありません"
         print("[テスト成功] 確率値がすべて整数です")
 
     def test_probabilities_in_range(self, probs):
         """確率設定の値が0より大きく100未満であることをテスト"""
         print("[境界値テスト] 確率値が0より大きく100未満か")
         for item, prob in probs.items():
-            assert 0 < prob < 100, f"アイテム'{item}'の確率({prob})が0から100の範囲外です"
+            assert (
+                0 < prob < 100
+            ), f"アイテム'{item}'の確率({prob})が0から100の範囲外です"
         print("[テスト成功] すべての確率値が0より大きく100未満です")
 
     def test_total_probability_is_100(self, probs):

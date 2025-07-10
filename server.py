@@ -1,7 +1,9 @@
 # FastAPIライブラリをインポート
 from fastapi import FastAPI
+
 # gacha.pyからgacha_draw関数をインポート
 from gacha import gacha_draw
+
 # FastAPIのCORSミドルウェアをインポート
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -23,6 +25,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 # サーバー起動時に実行されるイベントハンドラ
 @app.on_event("startup")
 def startup_event():
@@ -41,6 +44,7 @@ def get_gacha():
 # このファイルが直接実行された場合にのみ以下のコードを実行
 if __name__ == "__main__":
     import uvicorn
+
     port = 8000
     print(f"[INFO] APIサーバーを起動します。使用ポート: {port}")
     # uvicornサーバーを起動

@@ -28,9 +28,12 @@ class TestDistribution:
         for _ in range(num_trials):
             results.add(gacha_draw())
         expected_items = set(probs.keys())
-        assert expected_items == results, \
-            f"期待されるアイテム({expected_items})と実際に出現したアイテム({results})が異なります"
-        print(f"[テスト成功] {num_trials}回の試行で全てのアイテム({expected_items})が出現しました")
+        assert (
+            expected_items == results
+        ), f"期待されるアイテム({expected_items})と実際に出現したアイテム({results})が異なります"
+        print(
+            f"[テスト成功] {num_trials}回の試行で全てのアイテム({expected_items})が出現しました"
+        )
 
     def test_distribution_accuracy(self, probs):
         """ガチャの確率分布が設定値に近いことを統計的にテスト"""
@@ -44,9 +47,12 @@ class TestDistribution:
             observed_percentage = (counter[item] / N) * 100
             # 許容誤差を±1.5%に設定
             tolerance = 1.5
-            assert abs(observed_percentage - prob) < tolerance, \
-                f"アイテム'{item}': 期待値 {prob:.2f}%, 観測値 {observed_percentage:.2f}% (許容誤差±{tolerance}%) "
-            print(f"  アイテム'{item}': 期待値 {prob:.2f}%, 観測値 {observed_percentage:.2f}% (許容誤差±{tolerance}%) -> OK")
+            assert (
+                abs(observed_percentage - prob) < tolerance
+            ), f"アイテム'{item}': 期待値 {prob:.2f}%, 観測値 {observed_percentage:.2f}% (許容誤差±{tolerance}%) "
+            print(
+                f"  アイテム'{item}': 期待値 {prob:.2f}%, 観測値 {observed_percentage:.2f}% (許容誤差±{tolerance}%) -> OK"
+            )
         print("[テスト成功] 確率分布が設定値に統計的に近いことを確認しました")
 
     def test_distribution_reproducibility(self, probs):
@@ -64,4 +70,6 @@ class TestDistribution:
         results2 = [gacha_draw() for _ in range(num_draws)]
 
         assert results1 == results2, "乱数シードを固定しても結果が再現されません"
-        print(f"[テスト成功] 乱数シード({seed_value})を固定した際に、{num_draws}回のガチャ結果が再現されました")
+        print(
+            f"[テスト成功] 乱数シード({seed_value})を固定した際に、{num_draws}回のガチャ結果が再現されました"
+        )
