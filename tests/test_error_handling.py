@@ -24,7 +24,9 @@ class TestErrorHandling:
         """gacha_drawの返り値が文字列であることをテスト"""
         print("\n[エラーテスト] 返り値の型")
         result = gacha_draw()
-        assert isinstance(result, str), f"返り値の型が文字列ではありません: {type(result)}"
+        assert isinstance(
+            result, str
+        ), f"返り値の型が文字列ではありません: {type(result)}"
         assert len(result) == 1, f"返り値の長さが1ではありません: {len(result)}"
         print("[テスト成功] 返り値の型が正しく、長さが1です")
 
