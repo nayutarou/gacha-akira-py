@@ -24,7 +24,7 @@ decorator==5.2.1
     # via ipython
 executing==2.2.0
     # via stack-data
-fastapi==0.116.0
+fastapi==0.116.1
     # via -r requirements.in
 h11==0.16.0
     # via uvicorn
