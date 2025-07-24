@@ -32,10 +32,7 @@ def read_root():
     return {"message": "Welcome to Gacha World!"}
 
 
-# サーバー起動時に実行されるイベントハンドラ
-@app.on_event("startup")
-def startup_event():
-    print("[INFO] APIサーバーを起動します。使用ポート: 8000")
+
 
 
 # "/gacha"エンドポイント（GETリクエスト）
