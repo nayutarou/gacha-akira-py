@@ -1,7 +1,7 @@
 {
   "name": "gacha-akira-py",
   "version": "1.0.0",
-  "description": "",
+  "description": "A learning project for gacha mechanics using Python and FastAPI",
   "main": "main.py",
   "directories": {
     "test": "tests"

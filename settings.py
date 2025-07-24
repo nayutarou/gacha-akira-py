@@ -1,1 +1,3 @@
-gacha_probs = {"A": 5, "B": 10, "C": 20, "D": 65}
+from typing import Dict
+
+gacha_probs: Dict[str, int] = {"A": 5, "B": 10, "C": 20, "D": 65}

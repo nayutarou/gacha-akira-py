@@ -1,20 +1,7 @@
-import sys
-import os
 import pytest
 
-# プロジェクトのルートディレクトリをsys.pathに追加
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from gacha import gacha_draw
 from settings import gacha_probs
-
-
-@pytest.fixture
-def original_gacha_probs():
-    """テスト後にgacha_probsを元に戻すためのフィクスチャ"""
-    original = gacha_probs.copy()
-    yield
-    gacha_probs.clear()
-    gacha_probs.update(original)
 
 
 class TestErrorHandling:

@@ -13,3 +13,4 @@ black==25.1.0
 
 # 補助ツール
 ipython==9.4.0
+httpx
