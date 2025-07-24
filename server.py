@@ -26,6 +26,12 @@ app.add_middleware(
 )
 
 
+# "/"エンドポイント（GETリクエスト）
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to Gacha World!"}
+
+
 # サーバー起動時に実行されるイベントハンドラ
 @app.on_event("startup")
 def startup_event():
