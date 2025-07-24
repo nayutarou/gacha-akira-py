@@ -40,10 +40,11 @@ class TestMocking:
             counts[gacha.gacha_draw()] += 1
 
         # 多数派のアイテムが90%以上出現することを確認
+        EXPECTED_MAJORITY_PERCENTAGE = 0.9
         expected_majority_count = num_trials * (mock_probs[majority_key] / 100)
         # 許容誤差を考慮
         assert counts[majority_key] > (
-            expected_majority_count * 0.9
+            expected_majority_count * EXPECTED_MAJORITY_PERCENTAGE
         ), f"多数派のアイテム'{majority_key}'の出現回数({counts[majority_key]})が期待値({expected_majority_count})の90%を下回りました"
         print(
             f"[テスト成功] {majority_key}が期待通りに多数出現しました (出現回数: {counts[majority_key]}) "

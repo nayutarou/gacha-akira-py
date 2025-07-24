@@ -1,10 +1,5 @@
-
-import sys
-import os
 from fastapi.testclient import TestClient
 
-# プロジェクトのルートディレクトリをsys.pathに追加
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from server import app
 from settings import gacha_probs
 

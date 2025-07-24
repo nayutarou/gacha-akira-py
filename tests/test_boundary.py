@@ -1,16 +1,4 @@
-import sys
-import os
 import pytest
-
-# プロジェクトのルートディレクトリをsys.pathに追加
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from settings import gacha_probs
-
-
-@pytest.fixture
-def probs():
-    """ガチャの確率設定をフィクスチャとして提供"""
-    return gacha_probs
 
 
 class TestBoundary:

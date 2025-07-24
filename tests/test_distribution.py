@@ -61,11 +61,9 @@ class TestDistribution:
         seed_value = 42
         num_draws = 100
 
-        # 1回目の試行
         random.seed(seed_value)
         results1 = [gacha_draw() for _ in range(num_draws)]
 
-        # 2回目の試行
         random.seed(seed_value)
         results2 = [gacha_draw() for _ in range(num_draws)]
 
