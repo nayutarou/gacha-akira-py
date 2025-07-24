@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Check requirements.txt consistency
           command: |
-            . venv/bin/activate
+            source venv/bin/activate
             # --strip-extras を追加して警告を解消
             pip-compile --dry-run --output-file=- --strip-extras requirements.in | diff -u requirements.txt -
 
