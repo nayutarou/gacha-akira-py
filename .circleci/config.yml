@@ -1,18 +1,22 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
 version: 2.1
 
 jobs:
   build-and-test:
     docker:
+      # Pythonのバージョンに合わせて変更してください (例: cimg/python:3.9.1)
       - image: cimg/python:3.12.3
 
     steps:
       - checkout
 
+      # キャッシュの復元
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "requirements.txt" }}
             - v1-dependencies-
 
+      # 依存関係のインストール
       - run:
           name: Install Dependencies
           command: |
@@ -20,25 +24,30 @@ jobs:
             . venv/bin/activate
             pip install --upgrade pip
             pip install -r requirements.txt
-            pip install pip-tools
+            pip install pip-tools # pip-compileのために必要
 
+      # キャッシュの保存
       - save_cache:
           paths:
             - ./venv
           key: v1-dependencies-{{ checksum "requirements.txt" }}
 
+      # requirements.txt の整合性チェック
       - run:
           name: Check requirements.txt consistency
           command: |
             . venv/bin/activate
-            pip-compile --dry-run --output-file=- requirements.in | diff -u requirements.txt -
+            # --strip-extras を追加して警告を解消
+            pip-compile --dry-run --output-file=- --strip-extras requirements.in | diff -u requirements.txt -
 
+      # テストの実行
       - run:
           name: Run Tests
           command: |
             . venv/bin/activate
             pytest
 
+      # コードフォーマットのチェック
       - run:
           name: Check Code Format with Black
           command: |
