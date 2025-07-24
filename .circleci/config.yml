@@ -32,16 +32,13 @@ jobs:
             - ./venv
           key: v1-dependencies-{{ checksum "requirements.txt" }}
 
-      # requirements.txt の整合性チェック (デバッグ用)
+      # requirements.txt の整合性チェック
       - run:
-          name: Debug pip-compile output
+          name: Check requirements.txt consistency
           command: |
             . venv/bin/activate
-            echo "--- Start pip-compile output ---"
-            pip-compile --dry-run --output-file=- --strip-extras requirements.in
-            echo "--- End pip-compile output ---"
-            # diff コマンドは一時的にコメントアウトまたは削除
-            # pip-compile --dry-run --output-file=- --strip-extras requirements.in | diff -u requirements.txt -
+            # --strip-extras を追加して警告を解消
+            pip-compile --dry-run --output-file=- --strip-extras requirements.in | diff -u requirements.txt -
 
       # テストの実行
       - run:
