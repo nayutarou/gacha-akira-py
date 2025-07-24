@@ -8,49 +8,42 @@ jobs:
     steps:
       - checkout
 
-      # キャッシュの復元
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "requirements.txt" }}
             - v1-dependencies-
 
-      # 依存関係のインストール
       - run:
           name: Install Dependencies
           command: |
             python3 -m venv venv
-            . venv/bin/activate
+            source venv/bin/activate
             pip install --upgrade pip
             pip install -r requirements.txt
             pip install pip-tools
 
-      # キャッシュの保存
       - save_cache:
           paths:
             - ./venv
           key: v1-dependencies-{{ checksum "requirements.txt" }}
 
-      # requirements.txt の整合性チェック
       - run:
           name: Check requirements.txt consistency
           command: |
-            . venv/bin/activate
-            # ↓ pip-compileでrequirements.inからの出力と現在のrequirements.txtを比較（整合性チェック）
-            pip-compile --strip-extras --output-file=- requirements.in | diff -u requirements.txt -
+            source venv/bin/activate
+            pip-compile --quiet --strip-extras --output-file=- requirements.in | diff -u requirements.txt -
 
-      # テストの実行
       - run:
           name: Run Tests
           command: |
-            . venv/bin/activate
-            pytest
+            source venv/bin/activate
+            pytest --maxfail=1 --disable-warnings
 
-      # Blackによるコードフォーマットのチェック
       - run:
           name: Check Code Format with Black
           command: |
-            . venv/bin/activate
-            black --check .
+            source venv/bin/activate
+            black --check --diff .
 
 workflows:
   version: 2
