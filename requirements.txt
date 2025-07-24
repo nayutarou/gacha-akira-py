@@ -14,6 +14,8 @@ asttokens==3.0.0
     # via stack-data
 black==25.1.0
     # via -r requirements.in
+build==1.2.2.post1
+    # via pip-tools
 certifi==2025.7.14
     # via
     #   httpcore
@@ -24,6 +26,7 @@ charset-normalizer==3.4.2
 click==8.2.1
     # via
     #   black
+    #   pip-tools
     #   uvicorn
 decorator==5.2.1
     # via ipython
@@ -59,6 +62,7 @@ mypy-extensions==1.1.0
 packaging==25.0
     # via
     #   black
+    #   build
     #   pytest
 parso==0.8.4
     # via jedi
@@ -66,6 +70,8 @@ pathspec==0.12.1
     # via black
 pexpect==4.9.0
     # via ipython
+pip-tools==7.4.1
+    # via -r requirements.in
 platformdirs==4.3.8
     # via black
 pluggy==1.6.0
@@ -85,6 +91,10 @@ pygments==2.19.2
     #   ipython
     #   ipython-pygments-lexers
     #   pytest
+pyproject-hooks==1.2.0
+    # via
+    #   build
+    #   pip-tools
 pytest==8.4.1
     # via -r requirements.in
 requests==2.32.4
@@ -116,3 +126,9 @@ uvicorn==0.35.0
     # via -r requirements.in
 wcwidth==0.2.13
     # via prompt-toolkit
+wheel==0.45.1
+    # via pip-tools
+
+# The following packages are considered to be unsafe in a requirements file:
+# pip
+# setuptools
