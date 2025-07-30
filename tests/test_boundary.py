@@ -1,4 +1,6 @@
 import pytest
+from gacha import gacha_draw
+from settings import gacha_probs
 
 
 class TestBoundary:
@@ -28,3 +30,45 @@ class TestBoundary:
         total_prob = sum(probs.values())
         assert total_prob == 100, f"確率の合計値({total_prob})が100ではありません"
         print("[テスト成功] 確率の合計値が100です")
+
+    def test_no_items(self, original_gacha_probs):
+        """アイテムが1つもない場合にエラーを発生させることをテスト"""
+        print("[境界値テスト] アイテムが空の場合")
+        gacha_probs.clear()
+        with pytest.raises(ValueError):
+            gacha_draw()
+        print("[テスト成功] アイテムが空の場合にValueErrorが発生しました")
+
+    def test_single_item(self, original_gacha_probs):
+        """アイテムが1つだけの場合にそのアイテムを返すことをテスト"""
+        print("[境界値テスト] アイテムが1つの場合")
+        gacha_probs.clear()
+        gacha_probs["A"] = 100
+        assert gacha_draw() == "A"
+        print("[テスト成功] アイテムが1つの場合に正しく排出されました")
+
+    def test_zero_probability_item(self, original_gacha_probs):
+        """確率が0のアイテムが排出されないことをテスト"""
+        print("[境界値テスト] 確率0のアイテムが排出されないか")
+        gacha_probs.clear()
+        gacha_probs["A"] = 100
+        gacha_probs["B"] = 0
+        for _ in range(100):
+            assert gacha_draw() == "A"
+        print("[テスト成功] 確率0のアイテムは排出されませんでした")
+
+    def test_total_probability_over_100(self, original_gacha_probs):
+        """確率の合計値が100を超える場合にエラーを発生させることをテスト"""
+        print("[境界値テスト] 確率の合計値が100を超える場合")
+        gacha_probs["E"] = 10
+        with pytest.raises(ValueError):
+            gacha_draw()
+        print("[テスト成功] 確率の合計値が100を超える場合にValueErrorが発生しました")
+
+    def test_total_probability_under_100(self, original_gacha_probs):
+        """確率の合計値が100未満の場合にエラーを発生させることをテスト"""
+        print("[境界値テスト] 確率の合計値が100未満の場合")
+        gacha_probs["A"] = 50
+        with pytest.raises(ValueError):
+            gacha_draw()
+        print("[テスト成功] 確率の合計値が100未満の場合にValueErrorが発生しました")
