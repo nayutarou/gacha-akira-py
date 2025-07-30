@@ -1,22 +1,20 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
 version: 2.1
 
 jobs:
   build-and-test:
     docker:
-      # Pythonのバージョンに合わせて変更してください (例: cimg/python:3.9.1)
       - image: cimg/python:3.12.3
 
     steps:
       - checkout
 
-      # キャッシュの復元
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "requirements.txt" }}
-            - v1-dependencies-
+            # requirements.txtが変更されたらキャッシュを破棄
+            - v1-pip-cache-{{ checksum "requirements.txt" }}
+            # フォールバック用のキー
+            - v1-pip-cache-
 
-      # 依存関係のインストール
       - run:
           name: Install Dependencies
           command: |
@@ -24,37 +22,34 @@ jobs:
             . venv/bin/activate
             pip install --upgrade pip
             pip install -r requirements.txt
-            pip install pip-tools # pip-compileのために必要
+            pip install pip-tools
 
-      # キャッシュの保存
       - save_cache:
+          key: v1-pip-cache-{{ checksum "requirements.txt" }}
           paths:
-            - ./venv
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
+            # venvディレクトリではなく、pipのキャッシュディレクトリを保存
+            - ~/.cache/pip
 
-      # requirements.txt の整合性チェック (デバッグ用)
       - run:
-          name: Debug pip-compile output
+          name: Check requirements.txt consistency
           command: |
             . venv/bin/activate
-            echo "--- Start pip-compile output ---"
-            pip-compile --dry-run --output-file=- --strip-extras requirements.in
-            echo "--- End pip-compile output ---"
-            # diff コマンドは一時的にコメントアウトまたは削除
-            # pip-compile --dry-run --output-file=- --strip-extras requirements.in | diff -u requirements.txt -
+            # --no-header を付けてヘッダーの差分をなくし、問題を根本的に解決します
+            pip-compile --no-header --strip-extras --output-file=requirements.txt.tmp requirements.in
+            diff -u requirements.txt requirements.txt.tmp
 
-      # テストの実行
       - run:
           name: Run Tests
           command: |
             . venv/bin/activate
-            pytest
+            # pytest を直接実行する例
+            pytest -s tests
 
-      # コードフォーマットのチェック
       - run:
           name: Check Code Format with Black
           command: |
             . venv/bin/activate
+            # --check を付けて、フォーマットが必要な場合にエラーにします
             black --check .
 
 workflows:
