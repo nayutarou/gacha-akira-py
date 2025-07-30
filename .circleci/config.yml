@@ -34,7 +34,9 @@ jobs:
           name: Check requirements.txt consistency
           command: |
             . venv/bin/activate
-            pip-compile --strip-extras --output-file=- requirements.in | diff -u requirements.txt -
+            # 一時ファイルに生成してから比較することで、ヘッダーの差分を防ぐ
+            pip-compile --strip-extras --output-file=requirements.txt.tmp requirements.in
+            diff -u requirements.txt requirements.txt.tmp
 
       - run:
           name: Run Tests
