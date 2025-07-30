@@ -34,8 +34,8 @@ jobs:
           name: Check requirements.txt consistency
           command: |
             . venv/bin/activate
-            # 一時ファイルに生成してから比較することで、ヘッダーの差分を防ぐ
-            pip-compile --strip-extras --output-file=requirements.txt.tmp requirements.in
+            # --no-header を付けてヘッダーの差分をなくし、問題を根本的に解決します
+            pip-compile --no-header --strip-extras --output-file=requirements.txt.tmp requirements.in
             diff -u requirements.txt requirements.txt.tmp
 
       - run:
@@ -49,8 +49,8 @@ jobs:
           name: Check Code Format with Black
           command: |
             . venv/bin/activate
-            # black を直接実行する例
-            black .
+            # --check を付けて、フォーマットが必要な場合にエラーにします
+            black --check .
 
 workflows:
   version: 2
