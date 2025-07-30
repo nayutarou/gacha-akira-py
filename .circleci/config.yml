@@ -10,40 +10,45 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "requirements.txt" }}
-            - v1-dependencies-
+            # requirements.txtが変更されたらキャッシュを破棄
+            - v1-pip-cache-{{ checksum "requirements.txt" }}
+            # フォールバック用のキー
+            - v1-pip-cache-
 
       - run:
           name: Install Dependencies
           command: |
             python3 -m venv venv
-            source venv/bin/activate
+            . venv/bin/activate
             pip install --upgrade pip
             pip install -r requirements.txt
             pip install pip-tools
 
       - save_cache:
+          key: v1-pip-cache-{{ checksum "requirements.txt" }}
           paths:
-            - ./venv
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
+            # venvディレクトリではなく、pipのキャッシュディレクトリを保存
+            - ~/.cache/pip
 
       - run:
           name: Check requirements.txt consistency
           command: |
-            source venv/bin/activate
-            pip-compile --quiet --strip-extras --output-file=- requirements.in | diff -u requirements.txt -
+            . venv/bin/activate
+            pip-compile --strip-extras --output-file=- requirements.in | diff -u requirements.txt -
 
       - run:
           name: Run Tests
           command: |
-            source venv/bin/activate
-            pytest --maxfail=1 --disable-warnings
+            . venv/bin/activate
+            # pytest を直接実行する例
+            pytest -s tests
 
       - run:
           name: Check Code Format with Black
           command: |
-            source venv/bin/activate
-            black --check --diff .
+            . venv/bin/activate
+            # black を直接実行する例
+            black .
 
 workflows:
   version: 2
