@@ -31,7 +31,7 @@ class TestErrorHandling:
         """gacha_probsが空の場合にエラーが発生することを確認"""
         print("\n[エラーテスト] gacha_probsが空の場合")
         gacha_probs.clear()  # gacha_probsを空にする
-        with pytest.raises(IndexError) as excinfo:
+        with pytest.raises(ValueError) as excinfo:
             gacha_draw()
-        assert "list index out of range" in str(excinfo.value)
-        print("[テスト成功] gacha_probsが空の場合に正しくIndexErrorが発生しました")
+        assert "Total probability must be 100" in str(excinfo.value)
+        print("[テスト成功] gacha_probsが空の場合に正しくValueErrorが発生しました")
