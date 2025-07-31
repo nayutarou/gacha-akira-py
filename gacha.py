@@ -1,3 +1,4 @@
+# ガチャの抽選ロジックを定義するモジュール
 import random
 from typing import List
 from settings import gacha_probs

@@ -55,6 +55,7 @@ def get_gacha() -> dict:
 if __name__ == "__main__":
     import uvicorn
 
+    # サーバーのポート番号
     port = API_PORT
     logger.info("APIサーバーを起動します。使用ポート: %s", port)
     uvicorn.run("server:app", host="0.0.0.0", port=port, reload=True)
