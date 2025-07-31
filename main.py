@@ -1,3 +1,4 @@
+# コマンドラインからガチャを実行するためのスクリプト
 from gacha import gacha_draw
 
 
