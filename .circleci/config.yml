@@ -23,11 +23,23 @@ jobs:
           paths:
             - ~/.cache/pip
       - run:
-          name: Check requirements.txt consistency
+          name: Check and update requirements.txt
           command: |
             . venv/bin/activate
-            pip-compile --no-header --strip-extras --output-file=requirements.txt.tmp requirements.in
-            diff -u requirements.txt requirements.txt.tmp
+            # Overwrite requirements.txt with the latest dependencies
+            pip-compile --no-header --strip-extras --upgrade --output-file=requirements.txt requirements.in
+
+            # Check for changes and commit them if any exist
+            if ! git diff --quiet requirements.txt; then
+              git config user.email "ci-bot@circleci"
+              git config user.name "CircleCI Bot"
+              git add requirements.txt
+              git commit -m "ci: Update requirements.txt"
+              git push
+              echo "requirements.txt was updated and pushed to the repository."
+            else
+              echo "requirements.txt is already up to date."
+            fi
 
   test:
     docker:
