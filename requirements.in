@@ -7,7 +7,7 @@ requests==2.32.4
 starlette==0.46.2
 
 # テスト
-pytest==8.4.1
+pytest==8.4.2
 
 # Lint/整形
 black==25.1.0

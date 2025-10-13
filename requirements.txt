@@ -89,7 +89,7 @@ pyproject-hooks==1.2.0
     # via
     #   build
     #   pip-tools
-pytest==8.4.1
+pytest==8.4.2
     # via -r requirements.in
 requests==2.32.4
     # via -r requirements.in
@@ -107,7 +107,6 @@ traitlets==5.14.3
     #   matplotlib-inline
 typing-extensions==4.14.1
     # via
-    #   anyio
     #   fastapi
     #   pydantic
     #   pydantic-core
