@@ -107,7 +107,6 @@ traitlets==5.14.3
     #   matplotlib-inline
 typing-extensions==4.14.1
     # via
-    #   anyio
     #   fastapi
     #   pydantic
     #   pydantic-core
@@ -116,7 +115,7 @@ typing-inspection==0.4.1
     # via pydantic
 urllib3==2.5.0
     # via requests
-uvicorn==0.35.0
+uvicorn==0.38.0
     # via -r requirements.in
 wcwidth==0.2.13
     # via prompt-toolkit
