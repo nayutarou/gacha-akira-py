@@ -13,7 +13,7 @@ pytest==8.4.1
 black==25.1.0
 
 # 補助ツール
-ipython==9.4.0
+ipython==9.7.0
 httpx
 
 pip-tools==7.4.1
