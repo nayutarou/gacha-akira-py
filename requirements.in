@@ -16,4 +16,4 @@ black==25.1.0
 ipython==9.4.0
 httpx
 
-pip-tools==7.4.1
+pip-tools==7.5.2
