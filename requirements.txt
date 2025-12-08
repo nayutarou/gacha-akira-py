@@ -1,3 +1,5 @@
+annotated-doc==0.0.4
+    # via fastapi
 annotated-types==0.7.0
     # via pydantic
 anyio==4.9.0
@@ -26,7 +28,7 @@ decorator==5.2.1
     # via ipython
 executing==2.2.0
     # via stack-data
-fastapi==0.116.1
+fastapi==0.124.0
     # via -r requirements.in
 h11==0.16.0
     # via
@@ -107,7 +109,6 @@ traitlets==5.14.3
     #   matplotlib-inline
 typing-extensions==4.14.1
     # via
-    #   anyio
     #   fastapi
     #   pydantic
     #   pydantic-core
