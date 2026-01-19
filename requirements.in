@@ -10,7 +10,7 @@ starlette==0.46.2
 pytest==8.4.1
 
 # Lint/整形
-black==25.1.0
+black==26.1.0
 
 # 補助ツール
 ipython==9.4.0
